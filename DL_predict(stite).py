@@ -5,9 +5,9 @@ import pickle
 # ─────────────────────────────────────────────
 @st.cache_resource
 def load_models():
-    with open("/Users/yerim/Downloads/lightGBM_bayes_auc.pkl", "rb") as f:
+    with open("lightGBM_bayes_auc.pkl", "rb") as f:
         lgbm = pickle.load(f)
-    with open("/Users/yerim/Downloads/Catboost_bayes_auc.pkl", "rb") as f:
+    with open("Catboost_bayes_auc.pkl", "rb") as f:
         cbt = pickle.load(f)
     return lgbm, cbt
 
