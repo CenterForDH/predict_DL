@@ -6,11 +6,13 @@ import pickle
 @st.cache_resource
 def load_models():
     try:
-        model = joblib.load("lightGBM_bayes_auc.pkl")
+        lgbm = joblib.load("lightGBM_bayes_auc.pkl")
     except Exception as e:
         print(f"Model load failed: {e}")
-    with open("Catboost_bayes_auc.pkl", "rb") as f:
-        cat = pickle.load(f)
+    try:
+        cbt = joblib.load("Catboost_bayes_auc.pkl")
+    except Exception as e:
+        print(f"Model load failed: {e}")
     
     return lgbm, cbt
 
