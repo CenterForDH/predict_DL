@@ -1,5 +1,10 @@
-streamlit>=1.32
-pandas>=2.0
-joblib>=1.2
-lightgbm>=4.0
-catboost>=1.2
+lightgbm
+catboost
+joblib
+scikit-learn
+pandas
+streamlit
+imbalanced-learn
+scipy
+scikit-optimize
+optuna
