@@ -1,13 +1,14 @@
 import streamlit as st
 import pandas as pd
 import pickle
-import joblib
 
 # ─────────────────────────────────────────────
 @st.cache_resource
 def load_models():
-    lgbm = joblib.load(f)
-    cbt = joblib.load(f)
+    with open("lightGBM_bayes_auc.pkl", "rb") as f:
+        lgbm = pickle.load(f)
+    with open("Catboost_bayes_auc.pkl", "rb") as f:
+        cat = pickle.load(f)
     
     return lgbm, cbt
 
