@@ -1,14 +1,14 @@
 import streamlit as st
 import pandas as pd
 import pickle
+import joblib
 
 # ─────────────────────────────────────────────
 @st.cache_resource
 def load_models():
-    with open("lightGBM_bayes_auc.pkl", "rb") as f:
-        lgbm = pickle.load(f)
-    with open("Catboost_bayes_auc.pkl", "rb") as f:
-        cbt = pickle.load(f)
+    lgbm = joblib.load(f)
+    cbt = joblib.load(f)
+    
     return lgbm, cbt
 
 def soft_vote_proba(models, X):
