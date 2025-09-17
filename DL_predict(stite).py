@@ -1,9 +1,10 @@
 import streamlit as st
+import numpy as np
 import pandas as pd
 import pickle
 
 # ─────────────────────────────────────────────
-@st.cache_resource
+# @st.cache_resource
 def load_model():
     with open("lightGBM_bayes_auc.pkl", "rb") as f:
          lgbm=pickle.load(f)
