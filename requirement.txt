@@ -1,8 +1,8 @@
 streamlit
 pandas
 numpy
-scikit-learn==1.6.1
-lightgbm
-catboost
+scikit-learn==1.5.2
+lightgbm==4.5.0
+catboost==1.2.7
 joblib
 scikit-optimize
