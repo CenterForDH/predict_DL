@@ -7,9 +7,9 @@ import pickle
 # @st.cache_resource
 def load_model():
     with open("lightGBM_bayes_auc.pkl", "rb") as f:
-         lgbm=joblib.load(f)
+         lgbm=pickle.load(f)
     with open("Catboost_bayes_auc.pkl", "rb") as f:
-         cbt=joblib.load(f)
+         cbt=pickle.load(f)
         
     return lgbm, cbt
 
