@@ -96,7 +96,7 @@ def main():
     st.caption("Estimate your disease risk by entering your health and lifestyle information.")
 
     X_input = input_values()
-    lgbm_model, cat_model = load_models()
+    lgbm_model, cat_model = load_model()
     y_proba = soft_vote_proba((lgbm_model, cat_model), X_input)
 
     st.markdown("---")
