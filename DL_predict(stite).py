@@ -4,15 +4,13 @@ import pandas as pd
 import pickle
 
 # ─────────────────────────────────────────────
-# @st.cache_resource
-def load_model():
+@st.cache_resource
+def load_model_lgbm():
     with open("lightGBM_bayes_auc.pkl", "rb") as f:
-         lgbm=pickle.load(f)
+         return pickle.load(f)
+def load_model_cbt():   
     with open("Catboost_bayes_auc.pkl", "rb") as f:
-         cbt=pickle.load(f)
-        
-    return lgbm, cbt
-
+         return pickle.load(f)    
 
 
 def soft_vote_proba(models, X):
@@ -97,7 +95,9 @@ def main():
     st.caption("Estimate your disease risk by entering your health and lifestyle information.")
 
     X_input = input_values()
-    lgbm_model, cat_model = load_model()
+    lgbm_model=load_model_lgbm()
+    cat_model=load_model_cbt()
+    
     y_proba = soft_vote_proba((lgbm_model, cat_model), X_input)
 
     st.markdown("---")
