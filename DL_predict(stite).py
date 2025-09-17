@@ -4,17 +4,15 @@ import pickle
 
 # ─────────────────────────────────────────────
 @st.cache_resource
-def load_models():
-    try:
-        lgbm = pickle.load("lightGBM_bayes_auc.pkl")
-    except Exception as e:
-        print(f"Model load failed: {e}")
-    try:
-        cbt = pickle.load("Catboost_bayes_auc.pkl")
-    except Exception as e:
-        print(f"Model load failed: {e}")
-    
+def load_model():
+    with open("lightGBM_bayes_auc.pkl", "rb") as f:
+         lgbm=pickle.load(f)
+    with open("Catboost_bayes_auc.pkl", "rb") as f:
+         cbt=pickle.load(f)
+        
     return lgbm, cbt
+
+
 
 def soft_vote_proba(models, X):
     probs = [m.predict_proba(X)[:, 1] for m in models]
