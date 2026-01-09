@@ -13,9 +13,21 @@ def load_model_cbt():
          return pickle.load(f)    
 
 
+def _predict_proba_1d(model, X):
+    # LightGBM sklearn wrapper -> Booster로 우회
+    if hasattr(model, "booster_"):  # trained LGBMClassifier/LGBMRegressor
+        p = model.booster_.predict(X)  # binary면 양성확률로 나오는 경우가 많음
+        return np.asarray(p)
+    # CatBoost 등 일반적인 경우
+    if hasattr(model, "predict_proba"):
+        return model.predict_proba(X)[:, 1]
+    # 최후: predict가 확률을 주는 모델(드묾)
+    p = model.predict(X)
+    return np.asarray(p)
+
 def soft_vote_proba(models, X):
-    probs = [m.predict_proba(X)[:, 1] for m in models]
-    return sum(probs) / len(probs)
+    probs = [_predict_proba_1d(m, X) for m in models]
+    return np.mean(np.vstack(probs), axis=0)
 
 # ─────────────────────────────────────────────
 def input_values():
@@ -107,3 +119,4 @@ def main():
 # ─────────────────────────────────────────────
 if __name__ == "__main__":
     main()
+
