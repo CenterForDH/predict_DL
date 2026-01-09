@@ -4,7 +4,7 @@ import pandas as pd
 import pickle
 
 # ─────────────────────────────────────────────
-@st.cache_resource
+
 def load_model_lgbm():
     with open("lightGBM_bayes_auc.pkl", "rb") as f:
          return pickle.load(f)
